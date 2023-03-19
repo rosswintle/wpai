@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     WP AI Code Companion
  * Plugin URI:      PLUGIN SITE HERE
- * Description:     An AI Code Companion
+ * Description:     An AI Code Companion that you run ENTIRELY AT YOUR OWN RISK
  * Author:          Ross Wintle
  * Author URI:      https://rosswintle.uk
  * Text Domain:     wpai
@@ -12,6 +12,24 @@
  * @package         Wpai
  */
 
+/*
+ * This is a stupid idea. Don't use this plugin.
+ *
+ * You run this code ENTIRELY AT YOUR OWN RISK!!!
+ *
+ * I take no responsibility for you website being broken beyond repair; your
+ * laptop or server being wiped of all files; or ANYTHING that might happen as
+ * a result of you using this code.
+ *
+ * This code tells an AI of dubious trustworthiness to generate more code and
+ * then runs the "more code" on your computer.
+ *
+ * This is REALLY dangerous. You should not do this.
+ *
+ * And if you DO do it, do it on a temporary VPS, or a walled-off temporary site,
+ * or an instawp.com site or something. And you do that - and I can't say this
+ * strongly enough - entirely at your own risk.
+ */
 class WPAI {
 
 	/**
