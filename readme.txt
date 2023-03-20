@@ -14,11 +14,16 @@ This plugin gives you a WPAI helper class that generates functions for you using
 
 DO NOT USE THIS PLUGIN!!!
 
-But if you do:
+But...
+
+It's not done anything bad for me yet. But then, I've not asked it to to anything bad yet.
+
+If you are brave, curious, and know what you are doing:
 
 You run this code ENTIRELY AT YOUR OWN RISK!!!
 
 You accept ALL responsibility for anything that might happen as a result of using this plugin or running this code, including:
+
  - your website being broken beyond repair;
  - your laptop or server being wiped of all files;
  - your data being deleted from a database;
@@ -63,79 +68,35 @@ When you do this:
 * The plugin will save this function to a file in `mu-plugins/` for future use. Calling the same function will not require further API calls!
 * The plugin will run the function with the arguments you have passed and return the result.
 
+You can also generate queries using `WPAIU::query()`. For example:
+
+`WPAI::query('3 latest posts from the pages post type that have the metadata test=true and that do not have a meta key called "ignore"');`
+
+This currently only generates the query as text. It does not save or execute it.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+Remember: This plugin will execute arbitrary code provided by a potentially untrustworthy AI. Do not use this plugin on a real website, your own computer, or any computer that you care about. You accept all risk!
 
-e.g.
+1. Upload the plugin AS A MU-PLUGIN to the `/wp-content/mu-plugins/` directory
+2. Generate an OpenAI API key. I'm not providing instructions for this because you should only be using this if you know what you are doing.
+3. Add `define('WPAI_API_KEY', 'YOUR_API_KEY');` to your `wp-config.php` file.
+4. Start writing code!
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+== ANOTHER DISCLAIMER ==
 
-== Frequently Asked Questions ==
+DO NOT USE THIS PLUGIN!!!
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+YOU ACCEPT ALL RISK FOR USING THIS PLUGIN!!!
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 0.1.0 =
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+* I wrote a stupid plugin that you should not use.
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
+== REALLY, SERIOUSLY, DON'T USE THIS ==
 
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: https://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+It's stupid and dangerous.
