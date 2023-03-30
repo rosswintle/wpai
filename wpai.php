@@ -116,21 +116,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$params_string = implode(', ', $params_array);
 
 		$api_query =
-"// PHP
-/*
-Create a single, self-contained, complete PHP function that will $function_to_ask_for
+"
+Create a single, self-contained, complete PHP function called $name that will $function_to_ask_for
 
 Create only one function, and do not use any other functions. Assume no other functions exist and inline all code into one function.
 
 The function runs inside a WordPress plugin.
 
-The function exists in the namespace " . self::FUNCS_NAMESPACE . "
+The function exists in the namespace " . self::FUNCS_NAMESPACE . " but do not include the namespace declaration.
 
 Do not include any add_action or add_filter calls. Any registration functions are inside the function itself.
 
 After the function's closing bracket add a comment that says \"// END FUNCTION\"
-*/
-function $name ( $params_string ) {
 ";
 
 		// echo $api_query . "\n\n//----------------------\n\n";
@@ -139,12 +136,11 @@ function $name ( $params_string ) {
 
 		// var_dump($function);
 
-		$full_function = $api_query . $function;
-
-		self::write_function_to_file($full_function);
+		self::write_function_to_file($function);
 
 		// Create a temporary, global function to run the code.
-		$temp_function = str_replace( "function $name (", "function wpai_temp_$name (", $full_function );
+		$temp_function = str_replace( "function $name", "function wpai_temp_$name", $function );
+
 		eval($temp_function);
 		$func_name = 'wpai_temp_' . $name;
 		return $func_name(...$arguments);
@@ -183,24 +179,30 @@ function $name ( $params_string ) {
 
 	public static function query($text) {
 		$api_query = "
-// PHP
-/*
-A WordPress WP_Posts query that assignes the results to \$posts and fetches
+Write a WordPress WP_Posts query that assignes the results to a variable \$posts and fetches
 $text
 
-\$posts=get_posts([";
+Do not explain the function, just give me the raw code.";
 
 		// echo $api_query . "\n\n----------------------\n\n";
 
-		echo "\$posts=get_posts([\n" . self::send_query($api_query, ['stop' => ']);']) . ']);';
+		echo self::send_query($api_query, ['stop' => ']);']);
 	}
 
 	// Send a query to OpenAI
 	protected static function send_query($text, $options=[]) {
 		$defaults = [
-			// 'model' => 'code-davinci-002',
-			'model' => 'code-cushman-001',
-			'prompt' => $text,
+			'model' => 'gpt-3.5-turbo',
+			'messages' => [
+				[
+					'role' => 'system',
+					'content' => 'You are my helpful, PHP and WordPress coding helper',
+				],
+				[
+					'role' => 'user',
+					'content' => $text,
+				],
+			],
 			'max_tokens' => 1500,
 			'temperature' => 0,
 			'stream' => false,
@@ -208,7 +210,7 @@ $text
 
 		$options = array_merge( $defaults, $options );
 
-		$response = wp_remote_post('https://api.openai.com/v1/completions', [
+		$response = wp_remote_post('https://api.openai.com/v1/chat/completions', [
 			'headers' => [
 				'Authorization' => 'Bearer ' . WPAI_API_KEY,
 				'Content-Type' => 'application/json',
@@ -230,7 +232,10 @@ $text
 			return false;
 		}
 		$response_json = json_decode($response['body']);
-		return $response_json->choices[0]->text;
+
+		// var_dump($response_json->choices[0]);
+
+		return $response_json->choices[0]->message->content;
 	}
 
 
